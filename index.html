@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>title</title>
+    <!-- 导入swipper的css，最好放在自己的css样式上面，避免出现权重的问题 -->
+    <!-- <link rel="stylesheet" href="lib/swiper/swiper.min.css">   swiper样式合并到编译后的index.css文件里了-->
+    <!-- 编译后的index.css文件要在swiper样式的后面导入，避免出现覆盖问题 -->
+    <link rel="stylesheet" href="css/index.css">
+    <script>
+        document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+        ':35729/livereload.js?snipver=1"></' + 'script>')
+        </script>
+</head>
+
+<body>
+   
+        
+        
+
+    <!-- loading页面 -->
+    <div class="loading">
+        <div class="rider"></div>
+        <div class="progress"></div>
+        <div class="info"></div>
+        <!-- 外卖logo -->
+        <div class="logo"></div>
+        <!-- 版权信息 -->
+        <div class="copyright">
+            @ 2017 DuBa waimai Produced
+        </div>
+    </div>
+  <!-- 欢迎页 布局 -->
+  <div class="welcome">
+      <div class="info">
+          <div class="hello"></div>
+      </div>
+  </div>
+</body>
+
+</html>
+<script src="lib/swiper/swiper.min.js"></script>
+<!-- 导入zepto -->
+<script src="lib/zepto/zepto.js"></script>
+<script src="lib/zepto/event.js"></script>
+<script src="lib/zepto/fx.js"></script>
+<!--提供了长按的方法-->>
+<script src="lib/zepto/touch.js"></script>
+<script src="lib/zepto/fx_methods.js"></script>
+<!--提供了fadeOut的方法-->>
+<script>
+    var swiper = new Swiper(".swiper-container", {
+        direction: 'vertical',
+    })
+
+</script>

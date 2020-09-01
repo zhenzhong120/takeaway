@@ -1,0 +1,32 @@
+*{
+    margin:0;padding:0;
+    // 添加边框，避免盒子被撑开
+    box-sizing:border-box;
+    //top高亮,不要高亮效果：设置为none或者一般给透明即可
+    -webkit-tap-highLight-color:transparent;
+} 
+ul,ol{
+    list-style:none;
+}
+a{
+    text-decoration:none;
+}
+.fl{
+    float:left;
+}
+.fr{
+    float:right;
+}
+.clearfix::before,
+.clearfix::after{
+    content:"";
+    display:block;
+    line-height:0;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}
+.clearfix{
+    //移动端 可以省略
+zoom:1;
+}
