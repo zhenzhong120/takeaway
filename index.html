@@ -377,7 +377,7 @@
 
     })
 
-//为按钮绑定点击事件，控制音频播放
+//为按钮绑定点击事件，控制音频播放。
 var audioDom = document.querySelector("audio");
 $(".audioControl").click(function(){ //$(".audioControl")
 if(audioDom.paused == true){
@@ -388,6 +388,6 @@ if(audioDom.paused == true){
     audioDom.pause();
     $(this).css("background-image","url('images/play.png')");
 
-}
+} 
 })
 </script>
