@@ -16,23 +16,62 @@ html{font-size:26.666667vw;}
 
 }
 html{font-size:31.25vw;} 
+
+//为了使用时有语法提示，写在index.scss文件中,写在base.scss中 编译sass时不会有语法提示
+//px to rem
+@function p2r($size){
+    @return ($size/2/100) * 1rem;
+}
+
+//设置图片居中
+//background center
+@mixin bgc($url,$width){
+    background:url($url) no-repeat center /100% 100%;
+    position:absolute;
+    left:50%;
+    //此处是margin-left实现左右居中是为了后面动画中使用transform来改变元素
+    margin-left:p2r(-$width/2);
+
+}
+
+//直接设置背景图，不考虑居中
+@mixin bg($url){
+background:url($url) no-repeat center /100% 100%;
+position:absolute;
+}
+
+//设置尺寸
+@mixin size($width,$height){
+    width:p2r($width);
+    height:p2r($height);
+}
+
+
+
+
 .loading{
     height: 100%;
     width:100%;
     position: absolute;
     top:0;
     background-color:#ffece9;
+     // 调整层级
+     z-index:3;
     .rider{
-        position:absolute;
-     width: 0.77rem;  
-     height:0.605rem;
-     background:url("../images/loading/rider1_.png") no-repeat center /100% 100%;
+        @include bg("../images/loading/rider1_.png");
+        // position:absolute;
+        @include size(154,121);
+    //  width: 0.77rem;  
+    //  height:0.605rem;
+    //  background:url("../images/loading/rider1_.png") no-repeat center /100% 100%;
      top:1.165rem;
      right:0.54rem;
  }
    .progress{
-       width:2.08rem;
-       height:0.1rem;
+
+    @include size(416,20);
+    //    width:2.08rem;
+    //    height:0.1rem;
        background-color:#fc2e4d;
        border:2px solid #373838;
        border-radius:0.1rem;
@@ -43,22 +82,28 @@ html{font-size:31.25vw;}
 
    }
    .info{
-       width:1.1rem;
-       height:0.14rem;
-       background:url("../images/loading/loading-txt.png") no-repeat center/100% 100%;
-       position:absolute;
-       left:16%;
-       top:2.1rem;
-       margin-left:0.55rem;
+       @include size(220,28);
+    //    width:1.1rem;
+    //    height:0.14rem;
+    @include bgc("../images/loading/loading-txt.png",220);
+    //    background:url("../images/loading/loading-txt.png") no-repeat center/100% 100%;
+    //    position:absolute;
+    //    left:16%;
+    top:p2r(420);
+    //    top:2.1rem;
+    //    margin-left:0.55rem;
    }
    .logo{
-       width:0.81rem;
-       height:0.2rem;
-       background:url("../images/loading/waimai-logo.png") no-repeat center /100% 100%;
-       position:absolute;
-       bottom:0.54rem;
-       left:23%;
-       margin-left:0.4rem;
+       @include size(162,40);
+    //    width:0.81rem;
+    //    height:0.2rem;
+    //    background:url("../images/loading/waimai-logo.png") no-repeat center /100% 100%;
+    //    position:absolute;
+    bottom: p2r(108);
+    //    bottom:0.54rem;
+    //    left:23%;
+    //    margin-left:0.4rem;
+       @include bgc("../images/loading/waimai-logo.png",162);
 
   
     }
@@ -79,20 +124,1772 @@ text-align:center;
     width:100%;
     height:100%;
     background-color:deepskyblue;
+    z-index:2;
     //顶部文字
     .info{
-        width: 2rem;
-        height: 1.12rem;
-        background:url("../images/page1/theme-title.png") no-repeat center / 100% 100%;
-   position: absolute;
-   top:0.21rem;
-   left:50%;
-   margin-left:-1rem;
+        @include size(400,224);
+        @include bgc("../images/page1/theme-title.png",400);
+        top:0.21rem;
+
         .hello{
-            width:0.35rem;
-            height:0.35rem;
+            @include size(70,75);
+            @include bg("../images/page1/hello.png");
+          top:p2r(20);
+          right:p2r(8);
+          
         
         }
     
     }
+    .bear-box{
+        width: 0.83rem;
+        height:1.4rem;
+        position:absolute;
+        bottom:1.73rem;
+        left:50%;
+        margin-left:-0.415rem;
+
+        .bear{
+width: 100%;
+height: 100%;
+background:url("../images/page1/rider2.png") no-repeat center / 100% 100%;
+position:absolute;
+top: 0;
+left: 0;
+        }
+        .smoke{
+width:0.83rem;
+height:0.16em;
+background:url("../images/page1/jet1.png") no-repeat center / 100% 100%;
+position:absolute;
+bottom:0;
+        
+    }
+}
+    .cloud{
+        width:3.2rem;
+        height:3.36rem;
+      position: absolute;
+      bottom:0;
+      background:url("../images/page1/clouds.png") no-repeat center/ 100% 100%;
+
+    }
+    .grass1{
+        width:3.2rem;
+        height:2rem;
+      position: absolute;
+      bottom:0;
+      background:url("../images/page1/grass1.png") no-repeat center/ 100% 100%;
+
+    }
+    .trees{
+        width:2rem;
+        height:0.35rem;
+      position: absolute;
+      bottom:1.76rem;
+      background:url("../images/page1/trees.png") no-repeat center/ 100% 100%;
+
+    }
+    .grass2{
+        width:3.2rem;
+        height:1.14rem;
+      position: absolute;
+      bottom:0;
+      background:url("../images/page1/grass2.png") no-repeat center/ 100% 100%;
+
+
+    }
+
+    //旋转按钮的容器
+    .rotate-btn-box{
+       
+        width:(208/2/100) * 1rem;
+        height:1.04rem;
+        position: absolute;
+        bottom:0.43rem;
+        left:50%;
+        margin-left:-0.502rem; 
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        .btn{
+          width:0.62rem;
+          height:0.62rem;
+    //     position: absolute;
+    //     bottom:0.43rem;
+    //     top:0.265rem;
+    //  left:50%;
+    //  margin-left:-0.502rem;
+          background:url("../images/page1/bear-btn-aft.png") no-repeat center/ 100% 100%;
+
+     }
+       .circle1{
+           width:100%;
+           height:100%;
+           position:absolute;
+           top:0;
+           left:0;
+          background:url("../images/page1/circle1.png") no-repeat center/ 100% 100%;
+
+       }
+       .circle2{
+           width:100%;
+           height:100%;
+           position:absolute;
+           top:0;
+           left:0;
+          background:url("../images/page1/circle2.png") no-repeat center/ 100% 100%;
+
+       }
+
+    }
+}
+// swiper的样式
+.waimai-container{
+ width: 100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    // background:hotpink;
+   
+}
+// 因为都有 title部分 我们直接把title的样式 移到外面
+.title {
+    position: absolute;
+    left: p2r(32);
+    top: p2r(32);
+    padding-left: p2r(20);
+    h3 {
+        color: white;
+        font-size: p2r(64);
+    }
+    p {
+        color: white;
+        padding-top: p2r(12);
+        font-size: p2r(24);
+    }
+    .line {
+        height: 100%;
+        width: p2r(5);
+        background-color: white;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+.page1{
+    background-color:orange;
+    //标题
+    .title{
+        position: absolute;
+        left:p2r(32);
+        top:p2r(32);
+        padding-left:p2r(20);
+        h3{
+color:white;
+font-size:p2r(64);
+        }
+        p{
+            color:white;
+            font-size:p2r(24);
+            padding-top:p2r(12);
+        }
+        .line{
+        height:100%;
+        width:p2r(5);
+        background-color:white;
+        position: absolute;
+        left:0;
+        top:0;
+        }
+    }
+    //轮播区域1
+    .scroll-page1{
+        .bg{
+        @include bgc("../images/page2/bg1.png",576);
+        @include size(576,573);
+        bottom:p2r(252);
+
+        }
+        .person{   @include bgc("../images/page2/front1.png",439);
+            @include size(439,349);
+            bottom:p2r(290);
+        z-index:1; //人在sphere的上面显示
+            .files{
+                background-image:url("../images/page2/papers.png");
+                background-repeat:no-repeat;
+                background-position:bottom right;
+                background-size:p2r(115) p2r(114);
+                @include size(85,20);
+                bottom:p2r(104);
+                left:p2r(27);
+                position:absolute;
+                .paper1{
+                    background-image:url("../images/page2/papers.png");
+                    background-repeat:no-repeat;
+                    background-position:0 p2r(-32);
+                    background-size:p2r(115) p2r(114);
+                    @include size(86,26);
+                    position:absolute;
+                    bottom:p2r(45);
+                    left:p2r(-70);
+                }
+                .paper2{
+                    background-image:url("../images/page2/papers.png");
+                    background-repeat:no-repeat;
+                    background-position:p2r(-45) 0;
+                    background-size:p2r(115) p2r(114);
+                    @include size(64,20);
+                    position:absolute;
+                    bottom:p2r(80);
+                    right:0;
+                }
+            }
+    }
+     
+       
+        .message-container{
+            @include bg("../images/page2/txt-bubbl.png");
+            @include size(363,119);
+            bottom:p2r(140);
+            right:p2r(140);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            z-index:1;
+            .info{
+                @include bg("../images/page2/txt-work.png");
+                @include size(220,30);
+            }
+        }
+
+    }
+    //轮播区域2
+    .scroll-page2{
+        .bg{
+        @include bgc("../images/page2/bg2.png",582);
+        @include size(582,520);
+        bottom:p2r(252);
+
+        }
+        .person{   @include bgc("../images/page2/relax.png",436);
+            @include size(436,332);
+            bottom:p2r(270);
+        z-index:1; //人在sphere的上面显示
+        .leg1{
+            @include bg("../images/page2/leg1.png");
+            @include size(113,24);
+            bottom:p2r(110);
+            left:p2r(195);
+        }
+        .leg2{
+            @include bg("../images/page2/leg2.png");
+            @include size(85,71);
+            bottom:p2r(120);
+            left:p2r(193);
+        }
+           
+    }
+     
+      
+        .message-container{
+            @include bg("../images/page2/txt-bubbl.png");
+            @include size(363,119);
+            bottom:p2r(140);
+            right:p2r(140);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            z-index:1;
+            .info{
+                @include bg("../images/page2/txt-life.png");
+                @include size(224,30);
+            }
+        }
+
+    }
+   //轮播区域3
+   .scroll-page3{
+    .bg{
+    @include bgc("../images/page2/bg3.png",561);
+    @include size(561,516);
+    bottom:p2r(270);
+
+    }
+    .person{   @include bgc("../images/page2/person.png",503);
+        @include size(503,229);
+        bottom:p2r(300);
+    z-index:1; //人在sphere的上面显示
+    .word1{
+        @include bg("../images/page2/word1.png");
+        @include size(92,83);
+        left:p2r(7);
+        bottom:p2r(194);
+    }
+    .word2{
+        @include bg("../images/page2/word2.png");
+        @include size(77,70);
+        left:p2r(115);
+        bottom:p2r(245);
+    }
+    .word3{
+        @include bg("../images/page2/word3.png");
+        @include size(115,104);
+        right:p2r(130);
+        bottom:p2r(220);
+    }
+    .word4{
+        @include bg("../images/page2/word4.png");
+        @include size(79,73);
+        right:p2r(12);
+        bottom:p2r(230);
+    }
+    
+       
+}
+ 
+ 
+    .message-container{
+        @include bg("../images/page2/txt-bubbl.png");
+        @include size(363,119);
+        bottom:p2r(140);
+        right:p2r(140);
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        z-index:1;
+        .info{
+            @include bg("../images/page2/txt-res.png");
+            @include size(224,30);
+        }
+    }
+
+}
+    //球
+    .sphere{
+        @include bgc("../images/page2/sphere1.png",640);
+        @include size(640,356);
+        bottom:p2r(0);
+    }
+    //熊
+    .bear{
+        @include bg("../images/page2/bear1.png");
+        @include size(178,134);
+        right:p2r(38);
+        bottom:0;
+    }
+}
+.page2{
+    background-color: #EE4143;
+    .title {
+        position: absolute;
+        left: p2r(32);
+        top: p2r(32);
+        padding-left: p2r(20);
+        h3 {
+            color: white;
+            font-size: p2r(64);
+        }
+        p {
+            color: white;
+            padding-top: p2r(12);
+            font-size: p2r(24);
+        }
+        .line {
+            height: 100%;
+            width: p2r(5);
+            background-color: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+    .bg {
+        @include bgc('../images/page3/bg4_.png',
+        592);
+        @include size(592,
+        490);
+        bottom: p2r(330);
+    }
+    .bear {
+        background-image: url('../images/page3/bear2.png');
+        background-repeat: no-repeat;
+        background-size: p2r(368) p2r(427);
+        background-position: p2r(-103) p2r(-96);
+        position: absolute;
+        bottom: p2r(310);
+        left: 50%;
+        @include size(227,
+        336);
+        margin-left: p2r(-227/2);
+        z-index: 1;
+        .face1 {
+            @include bg('../images/page3/face1.png');
+            @include size(102,
+            102);
+            top: 0;
+            left: p2r(-102);
+        }
+        .face2 {
+            @include bg('../images/page3/face2.png');
+            @include size(101,
+            102);
+            top: p2r(-102);
+            right: p2r(-101/2);
+        }
+        .hand-left {
+            @include bg('../images/page3/hand-left_.png');
+            @include size(74,
+            77);
+            top: p2r(180);
+            left: p2r(30);
+        }
+        .hand-right {
+            @include bg('../images/page3/hand-right.png');
+            @include size(74,
+            77);
+            top: p2r(180);
+            right: p2r(30);
+        }
+    }
+    .sphere {
+        @include bg('../images/page3/sphere2.png');
+        @include size(640,
+        356);
+        bottom: 0;
+    } // 桌子
+    .table {
+        @include bgc('../images/page3/table.png',
+        514);
+        @include size(514,
+        258);
+        bottom: p2r(140);
+        z-index: 1;
+    } // 食物
+    .food {
+        @include bgc('../images/page3/foods.png',
+        354);
+        @include size(354,
+        152);
+        bottom: p2r(330);
+        z-index: 1;
+    }
+}
+.page3 {
+    background-color: #DD8A03;
+    .bg {
+        @include bgc('../images/page4/bg5.png',
+        592);
+        @include size(592,
+        580);
+        bottom: p2r(300);
+    }
+    .bear {
+        @include bgc('../images/page4/bear3.png',
+        206);
+        @include size(206,
+        321);
+        bottom: p2r(195);
+        z-index: 1;
+    }
+    .sphere {
+        @include bg('../images/page4/sphere3.png');
+        @include size(640,
+        356);
+        bottom: 0;
+    }
+    .license {
+        @include bg('../images/page4/license.png');
+        @include size(197,
+        140);
+        bottom: p2r(500);
+        left: p2r(40);
+    }
+    .oil {
+        @include bgc('../images/page4/oil.png',
+        205);
+        @include size(205,
+        107);
+        bottom: p2r(660);
+    }
+    .evil {
+        @include bg('../images/page4/evil2.png');
+        @include size(198,
+        163);
+        bottom: p2r(480);
+        right: p2r(30);
+    }
+}
+
+   // 轮播的页面4
+.page4 {
+    background-color: #3FA100;
+    .bg {
+        @include bgc('../images/page5/bg6.png',
+        588);
+        @include size(588,
+        333);
+        bottom: p2r(300);
+    }
+    .bear {
+        @include bg('../images/page5/bear4.png');
+        @include size(309,
+        325);
+        bottom: p2r(170);
+        left: p2r(200);
+        z-index: 1;
+    }
+    .sphere {
+        @include bg('../images/page5/sphere4.png');
+        @include size(640,
+        356);
+        bottom: 0;
+    }
+    .card1 {
+        @include bg('../images/page5/card1.png');
+        @include size(160,
+        175);
+        bottom: p2r(435);
+        left: p2r(32);
+    }
+    .card2 {
+        @include bgc('../images/page5/card2.png',
+        161);
+        @include size(161,
+        209);
+        bottom: p2r(530);
+    }
+    .card3 {
+        @include bg('../images/page5/card3.png');
+        @include size(167,
+        184);
+        bottom: p2r(420);
+        right: p2r(45);
+    }
+}
+
+.page5 {
+    background-color: #0098CF;
+    .bg {
+        @include bgc('../images/page6/bg7.png',
+        594);
+        @include size(594,
+        493);
+        bottom: p2r(300);
+    }
+    .bear {
+        @include bgc('../images/page6/rider2.png',
+        230);
+        @include size(230,
+        390);
+        bottom: p2r(175);
+        z-index: 1;
+        .smoke {
+            @include bgc('../images/page6/shadow.png',
+            114);
+            @include size(114,
+            26);
+            bottom: 0;
+        }
+    }
+    .sphere {
+        @include bg('../images/page6/sphere5.png');
+        @include size(640,
+        356);
+        bottom: 0;
+    }
+    .cloud {
+        @include bgc('../images/page6/weather-cloud.png',
+        432);
+        @include size(432,
+        160);
+        bottom: p2r(175+390+80);
+    }
+}
+
+.page6{
+    background-color: #0098CF;
+    .bg {
+        @include bgc('../images/page7/bg8.png',
+        588);
+        @include size(588,
+        333);
+        bottom: p2r(300);
+    }
+    .bear {
+        @include bgc('../images/page7/bear5.png',
+        285);
+        @include size(285,
+        328);
+        bottom: p2r(200);
+        z-index: 1;
+
+        .gift-box{
+            position:absolute;
+            top:0;
+            left:50%;
+            //     为了错开 熊腿 旋转的 角度 不能转满 360%
+           // 350 / 12 =29
+            >div:nth-child(1) {
+           
+            @include size(35,
+            29);
+            //围着熊旋转，z轴方向
+            transform:rotateZ(29deg) translateY(p2r(240));
+            }
+            >div:nth-child(2) {
+              
+                @include size(93,
+                79);
+            transform:rotateZ(29deg * 2) translateY(p2r(240));
+
+            }
+            >div:nth-child(3) {
+             
+                @include size(72,
+                64);
+            transform:rotateZ(29deg * 3 )translateY(p2r(240));
+
+            }
+            >div:nth-child(4) {
+             
+                @include size(91,
+                73);
+            transform:rotateZ(29deg * 4) translateY(p2r(240));
+
+            }
+            >div:nth-child(5) {
+              
+                @include size(99,
+                65);
+            transform:rotateZ(29deg * 5) translateY(p2r(240));
+
+            }
+            >div:nth-child(6) {
+              
+                @include size(107,
+                80);
+            transform:rotateZ(29deg * 6) translateY(p2r(240));
+
+            }
+            >div:nth-child(7) {
+               
+                @include size(107,
+                80);
+            transform:rotateZ(29deg * 7) translateY(p2r(240));
+
+            }
+            >div:nth-child(8) {
+               
+                @include size(88,
+                64);
+            transform:rotateZ(29deg * 8) translateY(p2r(240));
+
+            }
+            >div:nth-child(9) {
+              
+                @include size(78,
+                50);
+            transform:rotateZ(29deg * 9) translateY(p2r(240));
+
+            }
+            >div:nth-child(10) {
+             
+                @include size(49,
+                37);
+            transform:rotateZ(29deg * 10) translateY(p2r(240));
+
+            }
+            >div:nth-child(11) {
+               
+                @include size(51,
+                31);
+            transform:rotateZ(29deg * 11) translateY(p2r(240));
+
+            }
+            >div:nth-child(12) {
+               
+                @include size(37,
+                23);
+            transform:rotateZ(29deg * 12 - 5deg) translateY(p2r(240));
+
+            }
+        }
+        .gift-box{
+            position:absolute;
+            top:0;
+            left:50%;
+            //     为了错开 熊腿 旋转的 角度 不能转满 360%
+           // 350 / 12 =29
+            .gift1 {
+            @include bgc('../images/page7/gift1.png',
+            35);
+            @include size(35,
+            29);
+           
+            }
+            .gift2 {
+                @include bgc('../images/page7/gift2.png',
+                93);
+                @include size(93,
+                79);
+
+            }
+            .gift3 {
+                @include bgc('../images/page7/gift3.png',
+                72);
+                @include size(72,
+                64);
+
+            }
+            .gift4 {
+                @include bgc('../images/page7/gift4.png',
+                91);
+                @include size(91,
+                73);
+
+            }
+            .gift5 {
+                @include bgc('../images/page7/gift5.png',
+                99);
+                @include size(99,
+                65);
+
+            }
+            .gift6 {
+                @include bgc('../images/page7/gift6.png',
+                107);
+                @include size(107,
+                80);
+
+            }
+            .gift7 {
+                @include bgc('../images/page7/gift7.png',
+                107);
+                @include size(107,
+                80);
+
+            }
+            .gift8 {
+                @include bgc('../images/page7/gift8.png',
+                88);
+                @include size(88,
+                64);
+
+            }
+            .gift9 {
+                @include bgc('../images/page7/gift9.png',
+                78);
+                @include size(78,
+                50);
+
+            }
+            .gift10 {
+                @include bgc('../images/page7/gift10.png',
+                49);
+                @include size(49,
+                37);
+
+            }
+            .gift11 {
+                @include bgc('../images/page7/gift11.png',
+                51);
+                @include size(51,
+                31);
+
+            }
+            .gift12 {
+                @include bgc('../images/page7/gift12.png',
+                37);
+                @include size(37,
+                23);
+
+            }
+        }
+        
+    }
+    .sphere {
+        @include bg('../images/page7/sphere6.png');
+        @include size(640,
+        356);
+        bottom: 0;
+    }
+}
+.page7 {
+    background-color: #19072A;
+    .streetlight {
+        @include bg('../images/page8/streetlight.png');
+        @include size(80,
+        443);
+        bottom: p2r(300);
+        left: p2r(240);
+        .light {
+            @include bg('../images/page8/lamplight.png');
+            @include size(437,
+            427);
+            top: p2r(10);
+            left: p2r(-140);
+        }
+    }
+    .bear {
+        @include bg('../images/page8/bear6.png');
+        @include size(276,
+        271);
+        left: p2r(230);
+        bottom: p2r(280);
+    }
+    .motobike {
+        @include bg('../images/page8/moto.png');
+        @include size(200,
+        137);
+        bottom: p2r(335);
+        left: p2r(110)
+    }
+    .share {
+        @include bgc('../images/page8/share.png',
+        379);
+        @include size(379,
+        113);
+        bottom: p2r(140);
+    }
+    .info {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-size: p2r(24);
+        color: #b579d6;
+        bottom: p2r(70);
+    }
+    .sphere {
+        @include bg('../images/page8/sphere7.png');
+        @include size(640,
+        384);
+        bottom: 0;
+    }
+}
+
+
+
+//定义动画
+//进度条动画
+@keyframes steps {
+    //from{}  //如果是以图片默认的样式开启动画，则不用写from
+    to{
+        width:100%;
+    }
+}
+
+//熊开车动画
+@keyframes bearRide{
+    10%{   //熊开车移动到左边最远的距离是260px,细分为10份 260/10=26 ,同时向上晃动，y轴方向为负值
+        transform:translateX(p2r(-26 * 1)) translateY(p2r(-10));
+    }
+    20%{
+        transform:translateX(p2r(-26 * 2)) translateY(p2r(10));
+
+    }
+    30%{
+        transform:translateX(p2r(-26 * 3)) translateY(p2r(-10));
+
+    }
+    40%{
+        transform:translateX(p2r(-26 * 4)) translateY(p2r(10));
+
+    }
+    50%{
+        transform:translateX(p2r(-26 * 5)) translateY(p2r(-10));
+
+    }
+    60%{
+        transform:translateX(p2r(-26 * 6)) translateY(p2r(10));
+
+    }
+    70%{
+        transform:translateX(p2r(-26 * 7)) translateY(p2r(-10));
+
+    }
+    80%{
+        transform:translateX(p2r(-26 * 8)) translateY(p2r(10));
+
+    }
+    90%{
+        transform:translateX(p2r(-26 * 9)) translateY(p2r(-10));
+
+    }
+    100%{
+        transform:translateX(p2r(-26 * 10)) translateY(p2r(10));
+
+
+    }
+}
+
+//页面2  地动画
+@keyframes grass1{
+    to{
+        height:p2r(396);
+       }
+}
+
+//页面2  草2动画  由大变小
+@keyframes grass2{
+    from{  //起始时横向变宽2倍，竖向不变
+        transform:scale(2,1);
+    }
+    to{  //结束时，横向竖向都回到起始样式，不再放大倍数
+        opacity: 1;
+        //此处不设置transform，就会用自己默认的样式
+    }
+}
+
+//页面2 树动画
+@keyframes trees{
+    from{
+        transform:translateY(-200%);  //树默认透明度为0，起始位置是在上方2倍的位置
+    }
+    80%{
+        transform:translateY(10%); //到80%的进程时向下移动10%
+
+    }
+    90%{
+        transform:translateY(-10%); //90%的进程时向上弹10%
+
+    }
+    100%{
+        transform:none; //动画结束时回到起始样式
+        opacity:1;
+    }
+}
+
+//页面2 按钮动画
+@keyframes btnAppear{
+    from{}
+    to{
+        opacity:1;  //从无到有
+        transform:none;  //从小到大，初始状态是scale(0,0)
+    }
+}
+
+// 页面2 按钮旋转动画
+@keyframes rotate{
+    from{}
+    to{
+    transform:rotate(360deg);
+    }
+}
+//页面2  熊下落动画
+@keyframes bearDown{
+    from{
+        transform:translateY(-50%);
+    }
+    to{
+        transform:none;
+        opacity: 1;
+    }
+}
+
+//页面2 熊上下动画
+@keyframes upandDown{
+    from{
+        transform:translateY(-5%); //上
+    }
+    to{
+       // transform:translateY(0%); //下
+        transform:none; //回到默认样式
+    }
+}
+
+//页面2 
+@keyframes small2big{
+from{
+    transform:scale(0,0); //初始透明 =>从无到有 ；scale=》从小变大
+}
+to{
+    transform:none; //结束取消旋转动画，回到默认样式
+    opacity: 1;
+}
+}
+
+//熊 向下移动 透明度变为0，变大
+//使用动画时不要和transtion 混合使用
+@keyframes bearDisappear{
+    from{
+//动画开始时 透明度是1
+opacity:1;
+
+    }
+    to{
+        transform:translateY(100%) scale(1.5,1.5);
+        opacity: 0;
+    }
+}
+
+//直接调整样式为动画的初始样式
+// 为了实现进度条效果，进度条中添加子元素
+.loading{
+    .progress{
+        background-color:transparent;
+        .step{
+        height:100%;
+        width:20%;
+        background-color:#FF2947;
+        right:0;
+        position:absolute;
+        }
+    }
+}
+
+
+//以相同方式触发页面所有的动画 添加类名，触发自定义动画
+.loading.animate {
+    .step {
+        animation: steps .5s linear forwards; //forwards 动画播完之后，停在结束的位置
+    }
+    .rider {
+        animation: bearRide .5s linear forwards;
+    }
+}
+//欢迎页的默认样式
+.welcome{
+    .grass1{
+        height:p2r(20);
+    }
+    .grass2{
+        opacity:0;
+    }
+    .trees{
+        opacity:0;
+    }
+    .rotate-btn-box{
+        opacity:0;
+        transform:scale(0,0)
+    }
+    .bear-box{
+        opacity:0;
+    }
+    .smoke{
+        opacity: 0;
+    }
+    .info{
+        opacity: 0;
+    }
+    .hello{
+        opacity: 0;
+    }
+    
+}
+.welcome.animate{
+    .grass1{
+        animation:grass1 0.5s linear forwards;
+    }
+    .grass2{
+        animation:grass2 0.5s 0.5s forwards;
+    }
+    .trees{
+        animation:trees  0.5s  1s forwards;
+    }
+    .rotate-btn-box{
+        animation:btnAppear 0.5s 1.5s forwards;
+    }
+    .circle2{
+        animation:rotate 1s infinite linear;  //无限循环，不用延迟，匀速
+    }
+    .bear-box{
+        animation:bearDown 0.5s 2s forwards;
+    }
+    .bear{
+        animation:upandDown 0.5s 2.5s infinite; //无限循环
+    }
+    .smoke{
+        animation:small2big 0.5s 2.5s infinite; //和熊动画同时出现，无限循环
+    }
+    .info{
+        animation: bearDown 0.5s 3s forwards;  
+      }
+      .hello{
+        animation: small2big 0.5s 3.5s forwards;  
+
+      }
+}
+
+//轮播区域标题动画
+@keyframes right2left{
+    from{ //从右往左
+        transform:translateX(100%);
+
+    }
+    to{
+        transform:none;
+        opacity:1;
+    }
+}
+
+@keyframes heightBigger{
+    from{
+     height:0;
+    }
+    to{
+        height:100%;
+    }
+}
+//所有的title部分的动画结构一样
+.title{
+    h3{
+        opacity:0 ;
+    }
+    p{
+        opacity:0 ;
+    }
+    .line{
+        height:0% !important ;
+    }
+}
+
+.animate{
+    .title{
+        h3{
+        animation:right2left 0.5s linear forwards;
+
+        }
+        p{
+            animation:right2left 0.5s 0.2s forwards;
+
+        }
+        .line{
+            animation:heightBigger 0.5s 0.5s forwards;
+
+        }
+    }
+ 
+}
+
+//旋转进来， 停一会，再转出去
+@keyframes rotateInout{
+    0%{
+        transform:rotateZ(90deg); //向右旋转90deg
+    }
+    25%{
+        transform:rotateZ(-5deg);
+        opacity:1;
+    }
+    30%{
+        transform:rotateZ(0);
+        opacity:1;
+    }
+    65%{
+        transform:rotateZ(0);
+        opacity:1;
+    }
+    70%{
+        transform:rotateZ(5deg);
+        opacity:1;
+    }
+    100%{
+        transform:rotateZ(-90deg);
+    }
+
+}
+
+//转进来，不出去
+@keyframes rotateNoInout{
+    0%{
+        transform:rotateZ(90deg); //向右旋转90deg
+    }
+    25%{
+        transform:rotateZ(-5deg);
+        opacity:1;
+    }
+ 
+    100%{
+        transform:rotateZ(0deg);
+        opacity:1;
+
+    }
+
+}
+
+//上下左右的晃动
+@keyframes runUpDownLeftRight{
+    25%{
+        transform:translateX(10%) translateY(0);
+    }
+    50%{
+        transform:translateX(-10%) translateY(10%);
+    }
+    75%{
+        transform:translateX(0%) translateY(-10%);
+    }
+    100%{
+        transform:translateX(0) translateY(0);
+    }
+}
+
+//左右晃动
+@keyframes left2Right2left{
+    30%{
+        transform:translateX(-100%);
+    }
+   60%{
+        transform:translateX(100%);
+    }
+   100%{
+        transform:none;
+    }
+}
+
+//腿旋转回来
+@keyframes rotateBack{
+    from{}
+    to{
+        transform:none;
+    }
+}
+//区域1中的轮播部分
+.page1{
+    .scroll-page1{
+        .bg{
+            opacity:0;
+            transform-origin:50% 200%;
+            //相对于自身的起始点，水平方向为宽度的一半，垂直方向为下自身高度的两倍
+        }
+        .person{
+                opacity:0;
+                transform-origin:50% 200%;
+        }
+        .message-container{
+                opacity:0;
+                transform-origin:right bottom;
+        }
+    }
+    .scroll-page2{
+        .bg{
+            opacity:0;
+            transform-origin:50% 200%;
+            //相对于自身的起始点，水平方向为宽度的一半，垂直方向为下自身高度的两倍
+        }
+        .person{
+                opacity:0;
+                transform-origin:50% 200%;
+                .leg2{
+                    transform-origin:left bottom;
+                    transform:rotateZ(30deg);
+                }
+        }
+        .message-container{
+                opacity:0;
+                transform-origin:right bottom;
+        }
+    }
+    .scroll-page3{
+        .bg{
+            opacity:0;
+            transform-origin:50% 200%;
+            //相对于自身的起始点，水平方向为宽度的一半，垂直方向为下自身高度的两倍
+        }
+        .person{
+                opacity:0;
+                transform-origin:50% 200%;
+        }
+        .message-container{
+                opacity:0;
+                transform-origin:right bottom;
+        }
+    }
+}
+.animate{
+    .scroll-page1{
+        .bg{
+           animation: rotateInout 1.5s forwards;
+
+
+        }
+        .person{
+            animation: rotateInout 1.5s  0.5s forwards;
+                .paper1{
+                   animation:left2Right2left 1s infinite;
+                }
+                .paper2{
+                    animation:left2Right2left 1s infinite;
+
+                }
+        }
+        .message-container{
+            animation: rotateInout 1s  0.5s forwards;
+
+        }
+    }
+    .scroll-page2{
+        .bg{
+           animation: rotateInout 1.5s 2s forwards;  
+           //scroll-page1的动画播完再播放第二页 1.5s + 0.5s
+
+        }
+        .person{
+            animation: rotateInout 1.5s  2.5s forwards;
+            .leg2{  //腿 时间计算，当前scroll-page2动画执行到1/3的时候，开始抬腿，1.5s/3 + 2秒延迟时间
+                animation:rotateBack 1s 2.5s forwards;
+            }
+        }
+        .message-container{
+            animation: rotateInout 1s  3s forwards;
+
+        }
+    }
+    .scroll-page3{
+        .bg{
+           animation: rotateNoInout 0.5s  4s forwards;
+
+
+        }
+        .person{
+            animation: rotateNoInout 0.5s  4.5s forwards;
+
+        }
+        .message-container{
+            animation: rotateNoInout 0.5s  4.5s forwards;
+
+        }
+        .word1{
+            animation:runUpDownLeftRight 1s infinite;
+        }
+        .word2{
+            animation:runUpDownLeftRight 0.5s infinite;
+        }
+        .word3{
+            animation:runUpDownLeftRight 1.2s infinite;
+        }
+        .word4{
+            animation:runUpDownLeftRight 2s infinite;
+        }
+    }
+}
+
+//page2从下向上动画
+@keyframes bottom2Top{
+    from{
+        transform:translateY(100%);
+    }
+    to{
+        transform:none;
+        opacity:1;
+    }
+}
+
+//从小变大再变小
+@keyframes small2big2small{
+    from{
+        transform:scale(0,0);
+    }
+    95%{
+        transform:scale(1.2,1.2);
+        opacity:1;
+    }
+    100%{
+        transform:none;
+        opacity:1;
+    }
+}
+//晃动的小手
+@keyframes leftShake{
+ 30%{
+     transform:rotateZ(20deg)
+ }
+ 60%{
+     transform:rotateZ(-20deg);       
+     
+ }
+ 100%{
+     transform:none;
+ }
+}
+
+
+//页面2的初始样式
+.page2{
+    .bg {
+     opacity:0;
+     transform-origin:50% 200%;
+    }
+    #bear1 {
+      opacity: 0;
+        .face1 {
+            opacity: 0;
+
+        }
+        .face2 {
+            opacity: 0;
+
+        }
+        .hand-left {
+          transform-origin:left top;
+        }
+        .hand-right {
+          transform-origin:right top;
+           
+        }
+    }
+  
+    .table {
+        opacity: 0;
+
+    } 
+    .food {
+        opacity: 0;
+
+    }
+}
+ .animate{
+    .bg{
+        animation:rotateNoInout 0.5s forwards;
+    }
+    .table{
+        animation:bearDown 0.5s 0.5s forwards;
+    }
+    #bear1{
+  animation:bottom2Top 1s 1s forwards;
+  .face1{
+      animation:small2big2small 0.5s 2s forwards;
+  }
+  .face2{
+      animation:small2big2small 0.5s 2s forwards;
+  }
+  .hand-left{
+      animation:leftShake 0.5s infinite;
+  }
+  .hand-right{
+      animation:leftShake 0.8s infinite;
+  }
+    }
+    .food{
+        animation:bearDown 0.5s 1.5s forwards;
+
+    }
+}
+
+//页面3的初始样式
+.page{
+    .bg{
+opacity: 0;
+transform-origin:50% 200%;
+    }
+    .bear{
+        opacity: 0;
+
+    }
+    .license{
+        opacity: 0;
+
+    }
+    .oil{
+        opacity: 0;
+
+    }
+    .evil{
+        opacity: 0;
+
+    }
+}
+.animate{
+    .bg{
+        animation:rotateNoInout 0.5s forwards;
+    }
+    .bear{
+        animation:bearDown 0.5s 0.5s forwards;
+
+    }
+    .license{
+  animation:small2big2small 0.5s 1s forwards,runUpDownLeftRight 0.5s 1.5s infinite;
+  
+    }
+    .oil{
+        animation:small2big2small 0.5s 1s forwards,runUpDownLeftRight 0.5s 1.5s infinite;
+
+    }
+    .evil{
+        animation:small2big2small 0.5s 1s forwards,runUpDownLeftRight 0.5s 1.5s infinite;
+
+
+    }
+}
+
+//防止溢出滚动 内容区高度过高，导致整屏都能滚动，无法实现第三个swiper区域禁止滑动的效果
+.waimai-container{
+overflow:hidden;
+}
+
+//页面3： 踢牌子的熊的样式
+.page3{
+    .animtaion-bear-box{
+    .animate-bear1{
+        @include bgc("../images/page4/bear3-1-1.png",251);
+        bottom:0.975rem;
+        @include size(251,335);
+        z-index: 1;
+        opacity: 0;
+    }
+    .animate-bear2{
+        @include bgc("../images/page4/bear3-2-1.png",215);
+        bottom:0.975rem;
+        @include size(215,313);
+        z-index: 1;
+        opacity: 0;
+
+
+
+    }
+    .animate-bear3{
+        @include bgc("../images/page4/bear3-3-1.png",290);
+        bottom:0.975rem;
+        @include size(290,321);
+        z-index: 1;
+        opacity: 0;
+
+
+
+    }
+    }
+
+//牌子的默认样式
+    .hit-card-box{
+    .card1{
+        @include bg("../images/page4/license1.png");
+        @include size(228,151);
+        bottom: 2.5rem;
+    left: 0.2rem;
+    opacity:0;
+    }
+    .card2{
+        @include bgc("../images/page4/oil1.png",231);
+        @include size(231,156);
+        bottom: 3.3rem;
+    opacity:0;
+
+    }
+    .card3{
+        @include bg("../images/page4/evil21.png");
+        @include size(211,173);
+        bottom: 2.4rem;
+        right: 0.15rem;
+    opacity:0;
+
+    }
+    }
+}
+
+//page4 默认的初始样式
+.page4{
+    .bg{
+     opacity: 0;
+    }
+    #bear4{
+        opacity: 0;
+
+    }
+    .card1{
+     opacity: 0;
+        
+    }
+    .card2{
+        opacity: 0;
+
+    }
+    .card3{
+        opacity: 0;
+
+    }
+}
+.animate{
+    
+        .bg{
+            animation:rotateNoInout 0.5s forwards;
+        }
+        .bear{
+            animation:bearDown 0.5s 0.5s forwards;
+    
+        }
+      #card1{
+            animation:small2big2small 0.5s 1s forwards;
+        }
+        #card2{
+            animation:small2big2small 0.5s 1s forwards;
+        }
+        #card3{
+            animation:small2big2small 0.5s 1s forwards;
+        }
+    
+}
+@keyframes snowLeft{
+from{
+
+}
+50%{
+    opacity: 1;
+}
+to{
+    transform:translateY(1000%) translateX(-200%);
+    opacity:1;
+}
+}
+@keyframes snowRight{
+from{
+
+}
+50%{
+    opacity: 1;
+
+}
+to{
+    transform:translateY(1000%) translateX(200%);
+    opacity:1;
+
+}
+}
+
+    
+//页面5 默认的初始样式
+.page5{
+    .bg{
+        opacity:0;
+
+    }
+    .bear{
+        opacity:0;
+
+    }
+    #cloud{
+        opacity:0;
+        //添加雪花的样式
+        .snow{
+            @include bg("../images/page6/snow-piece.png");
+            @include size(32,32);
+            bottom:0;
+            opacity: 0;
+        }
+        .snow:nth-child(2){
+            left:p2r(32);
+            opacity: 0;
+
+        }
+        .snow:nth-child(3){
+            left:p2r(32*2);
+            opacity: 0;
+
+        }
+        .snow:nth-child(4){
+            left:p2r(32*3);
+            opacity: 0;
+
+        }
+        .snow:nth-child(5){
+            left:p2r(32*4);
+            opacity: 0;
+
+        }
+        .snow:nth-child(6){
+            left:p2r(32*5);
+            opacity: 0;
+
+        }
+
+    }
+    .smoke{
+        opacity:0;
+    }
+    }
+
+.animate{
+    .bg{
+        animation:rotateNoInout 0.5s forwards;
+    }
+    #bear5{
+        animation:bearDown 0.5s 0.5s forwards,upandDown 0.5s 1s infinite;
+    }
+  //熊延迟5秒出来，然后延迟五秒开始上下运行，烟和熊同时开始运动
+    .smoke{
+        animation:small2big 0.5s 1s infinite; //和熊动画同时出现，无限循环
+    }
+    #cloud{
+            animation:small2big2small 0.5s 1s forwards,
+            runUpDownLeftRight 1s 1.5s infinite;
+
+            .snow:nth-child(1){
+              animation:snowLeft 0.5s 1.5s infinite;
+            }
+            .snow:nth-child(2){
+                animation:snowRight 0.3s 1.5s infinite;
+
+            }
+            .snow:nth-child(3){
+                animation:snowLeft 1s 1.5s infinite;
+            }
+            .snow:nth-child(4){
+                animation:snowRight 2s 1.5s infinite;
+            }
+            .snow:nth-child(5){
+                animation:snowLeft 0.4s 1.5s infinite;
+            }
+            .snow:nth-child(6){
+                animation:snowRight 0.8s 1.5s infinite;
+            }
+    }
+    
+}
+
+//transform默认是none,还原为自己初始的样式
+@keyframes none2Normal{
+from{
+    transform:none;
+}
+to{
+    opacity:1;
+}
+}
+
+@keyframes big2small{
+    from{}
+    to{
+        transform:scale(0,0);
+        opacity:0;
+    }
+}
+
+//页面6的默认的初始样式
+.page6{
+    .gift-box>div{
+        opacity: 0;
+        position:absolute;
+        top:0;
+        bottom:0;
+    }
+
+}
+.animate{
+    @for $i from 1 through 12{
+        .gift-box>div:nth-child(#{$i}){
+  
+            animation:none2Normal 2s $i*0.1s infinite;  // 包着图片的盒子div外面的盒子div旋转
+
+        }
+    }
+    @for $i from 1 through 12{
+        .gift-box>div:nth-child(#{$i})>div{
+  
+            animation:rotate 1s $i*0.1s infinite;  // 包着图片的盒子div旋转
+
+        }
+    }
+
+  
+}
+
+//播放按钮的样式
+.audioControl{
+    @include size(36,36);
+    position: absolute;
+    top:p2r(32);
+    right:p2r(32);
+    background:url("../images/play.png") no-repeat center /100% 100%;
+    z-index:998;
 }

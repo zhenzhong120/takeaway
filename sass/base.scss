@@ -5,6 +5,10 @@
     //top高亮,不要高亮效果：设置为none或者一般给透明即可
     -webkit-tap-highLight-color:transparent;
 } 
+input{
+    border:none;
+    outline:none;
+}
 ul,ol{
     list-style:none;
 }

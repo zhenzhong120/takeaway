@@ -10,6 +10,8 @@
     <!-- <link rel="stylesheet" href="lib/swiper/swiper.min.css">   swiper样式合并到编译后的index.css文件里了-->
     <!-- 编译后的index.css文件要在swiper样式的后面导入，避免出现覆盖问题 -->
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="animate.min.css">
+
     <style>
         html,
         body {
@@ -54,7 +56,9 @@
     <!-- 切换的页面，swipper实现 -->
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">1</div>
+            <div class="swiper-slide">
+                <div ></div>
+            </div>
             <div class="swiper-slide">2</div>
             <div class="swiper-slide">3</div>
             <div class="swiper-slide">4</div>
@@ -65,19 +69,21 @@
     </div>
 
     <!-- loading页面 -->
-    <div class="loading"></div>
+    <div class="loading">
+        <div class="animate bounce" style="width:100px;height:100px;background:red;"></div>
+    </div>
     <!-- 欢迎页面 -->
-    <div class="welcome"></div>
+    <div class="welcome "></div>
 </body>
 
 </html>
-<script src="lib/swiper/swiper.min.js"></script>
+ <script src="lib/swiper/swiper.min.js"></script> 
 <!-- 导入zepto -->
 <script src="lib/zepto/zepto.js"></script>
 <script src="lib/zepto/event.js"></script>
-<script src="lib/zepto/fx.js"></script> <!--提供了长按的方法-->>
+<script src="lib/zepto/fx.js"></script> <!--提供了长按的方法-->
 <script src="lib/zepto/touch.js"></script>
-<script src="lib/zepto/fx_methods.js"></script> <!--提供了fadeOut的方法-->>
+<script src="lib/zepto/fx_methods.js"></script> <!--提供了fadeOut的方法-->
 <script>
     var swiper = new Swiper(".swiper-container", {
         direction: 'vertical',
